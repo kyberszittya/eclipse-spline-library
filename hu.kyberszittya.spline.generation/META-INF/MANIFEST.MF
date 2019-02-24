@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Transformation
+Bundle-SymbolicName: hu.kyberszittya.spline.generation
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: transformation.jar,
+ lib/commons-math3-3.6.1.jar
+Export-Package: 
+ hu.kyberszittya.spline.generation.transformation,
+ hu.kyberszittya.spline.generation.transformation.math
+Require-Bundle: com.google.guava;bundle-version="21.0.0",
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtend.lib,
+ org.eclipse.xtend.lib.macro
