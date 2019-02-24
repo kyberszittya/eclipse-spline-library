@@ -40,4 +40,12 @@ public class Vec3 {
 	def Vec3 operator_divide(double e2) {
 		return new Vec3(x / e2, y / e2, z / e2)
 	}
+	
+	def double length(){
+		return Math.sqrt(x*x+y*y+z*z)
+	}
+	
+	def Vec3 normalize(){
+		return new Vec3(x,y,z)/length()
+	}
 }

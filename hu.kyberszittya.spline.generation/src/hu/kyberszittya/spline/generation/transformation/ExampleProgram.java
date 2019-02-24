@@ -1,10 +1,20 @@
 package hu.kyberszittya.spline.generation.transformation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import hu.kyberszittya.spline.generation.transformation.math.CatmullRomSpline;
 import hu.kyberszittya.spline.generation.transformation.math.Vec3;
@@ -23,11 +33,45 @@ public class ExampleProgram {
 		CatmullRomSpline cv = new CatmullRomSpline(cvs, true, 0.9, 0.6);
 		
 		final JFrame frame = new JFrame();
+		final FlowLayout layout = new FlowLayout();
+		final JPanel controls = new JPanel();
+		final JSlider tension_slider = new JSlider(0, 1000);
+		SplineWindow win = new SplineWindow(cv);
+		tension_slider.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				double val = (((JSlider)e.getSource()).getValue())/1000.0;
+				cv.setTension(val);
+				cv.initialize();
+				frame.invalidate();
+				frame.repaint();
+			}
+		});
+		final JSlider alpha_slider   = new JSlider(0, 1000);
+		alpha_slider.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				double val = (((JSlider)e.getSource()).getValue())/1000.0;
+				cv.setAlpha(val);
+				cv.initialize();
+				frame.invalidate();
+				frame.repaint();
+			}
+		});
 		frame.setSize(800, 800);
 		frame.setBackground(Color.WHITE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		SplineWindow win = new SplineWindow(cv);
+		
+		win.setPreferredSize(new Dimension(800, 600));
 		frame.add(win);
+		controls.add(new JLabel("Tension"));
+		controls.add(tension_slider);
+		controls.add(new JLabel("Alpha"));
+		controls.add(alpha_slider);
+		frame.setLayout(layout);
+		frame.add(controls, BorderLayout.SOUTH);
 		frame.setVisible(true);
 		
 	}

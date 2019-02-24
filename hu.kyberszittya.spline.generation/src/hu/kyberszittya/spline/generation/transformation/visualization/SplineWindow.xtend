@@ -26,12 +26,34 @@ class SplineWindow extends JPanel {
 		]
 		val List<Integer> xs = new ArrayList() 
 		val List<Integer> ys = new ArrayList()
-		g.color = Color.BLUE
+		// Check first-order derivative
+		for (var double t = cs.minT; t < cs.maxT; t+=0.1){
+			val r = cs.rt(t);
+			val dr = cs.drt(t)
+			g.color = Color.PINK
+			g.drawLine(r.x as int, 
+				r.y as int,
+				(r.x + dr.x * 10) as int,
+				(r.y + dr.y * 10) as int
+			)
+		}
+		// Check XY perpendicular width
 		for (var double t = cs.minT; t < cs.maxT; t+=0.1){
 			val r = cs.rt(t);
 			xs.add(r.x as int)
 			ys.add(r.y as int)
+			
+			g.color = Color.ORANGE
+			val ndr = cs.drt_normalized(t)
+			g.drawLine(r.x as int, 
+				r.y as int,
+				(r.x + ndr.y * 6) as int,
+				(r.y + -ndr.x * 6) as int
+			)
+			
 		}
+		
+		g.color = Color.BLUE
 		g.drawPolyline(xs, ys, ((cs.maxT - cs.minT)/0.1) as int)
 	}
 }
