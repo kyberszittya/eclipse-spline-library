@@ -48,7 +48,7 @@ class SplineWindow extends JPanel {
 			g.drawLine(r.x as int, 
 				r.y as int,
 				(r.x + ndr.y * 6) as int,
-				(r.y + -ndr.x * 6) as int
+				(r.y - ndr.x * 6) as int
 			)
 			
 		}

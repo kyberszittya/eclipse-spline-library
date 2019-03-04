@@ -1,4 +1,4 @@
-package hu.sze.jkk.racecar.environment.generator.test
+package hu.kyberszittya.spline.generation.test
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test
